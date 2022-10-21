@@ -1,0 +1,5 @@
+@set('as', as ?? 'div')
+
+<{{ as }} class="bg-white w-[11in] h-[8.5in] mx-auto p-[1.25in] {{ className }}">
+  {{{ await $slots.main() }}}
+</{{ as }}>

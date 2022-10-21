@@ -1,0 +1,15 @@
+<label class="block mb-3">
+  @if (label)
+    <span class="text-xs uppercase tracking-wider font-medium text-gray-600">
+      {{ label }}
+    </span>
+  @endif
+
+  <input type="{{ type ?? 'text' }}" name="{{ name }}" class="bg-white text-sm border border-gray-300 rounded px-2 py-1 w-full">
+
+  @if (Array.isArray(errors) && errors.length)
+    <small class="text-xs text-red-500 mt-1">
+      {{ sentenceCase(errors.join(', ')) }}
+    </small>
+  @endif 
+</label>

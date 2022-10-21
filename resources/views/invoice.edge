@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 m-6">
+
+  @containers.print({ as: 'main' })
+    <div class="mb-12">
+      <h1 class="text-3xl font-serif tracking-wider">
+        INVOICE
+      </h1>
+      @if (recipient)
+        <h5 class="font-mono text-gray-600">
+          Generated for: {{ recipient.name }}
+        </h5>
+      @endif
+      <h5 class="font-mono text-gray-600">
+        Sent by: {{ user.email }}
+      </h5>
+    </div>
+
+    <div class="mb-12 font-mono">
+      <h3 class="font-bold">Abstergo Ind.</h3>
+      <address>
+        1234 Abs Parkway<br/>
+        Cupertino, California 95014
+      </address>
+    </div>
+
+    <table class="w-full mb-12 font-mono">
+      <tr>
+        <td class="font-bold">Quantity</td>
+        <td class="font-bold">Description</td>
+        <td class="font-bold text-right">Unit Price</td>
+        <td class="font-bold text-right">Amount</td>
+      </tr>
+      <tr>
+        <td>1.0</td>
+        <td>24h Animus Usage</td>
+        <td class="text-right">$12,000.00</td>
+        <td class="text-right">$12,000.00</td>
+      </tr>
+      <tr>
+        <td>1.0</td>
+        <td>Abstergo T-Shirt</td>
+        <td class="text-right">$15.00</td>
+        <td class="text-right">$15.00</td>
+      </tr>
+    </table>
+
+    <dl class="flex flex-col items-end font-mono">
+      <div class="inline-grid grid-cols-2 justify-end">
+        <dt class="font-bold">Subtotal</dt>
+        <dd class="w-28 text-right">$12,015.00</dd>
+      </div>
+      <div class="inline-grid grid-cols-2 justify-end">
+        <dt class="font-bold">Sales Tax</dt>
+        <dd class="w-28 text-right">$750.94</dd>
+      </div>
+      <div class="inline-grid grid-cols-2 justify-end">
+        <dt class="font-bold">Total</dt>
+        <dd class="w-28 text-right font-bold">$12,765.94</dd>
+      </div>
+    </dl>
+  @end
+
+</body>
+</html>

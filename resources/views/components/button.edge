@@ -1,0 +1,13 @@
+@set('block', block ?? false)
+@set('blockClass', block ? 'block w-full text-center' : '')
+@set('className', className ?? `${blockClass} bg-gray-900 text-gray-200 hover:bg-gray-800 hover:text-white duration-150 text-xs uppercase tracking-wider px-3 py-2 rounded`)
+
+@if (!href)
+  <button type="{{ type ?? 'button' }}" class="{{ className }}">
+    {{{ await $slots.main() }}}
+  </button>
+@else
+  <a href="{{ href }}" class="{{ className }}">
+    {{{ await $slots.main() }}}
+  </a>
+@endif

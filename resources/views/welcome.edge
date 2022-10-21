@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creating A PDF Generator & Sending as an Email Attachment with AdonisJS & Puppeteer | Adocasts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 pt-12">
+
+  <div class="container flex flex-wrap">
+    <aside class="w-full md:w-1/4 px-6">
+      @if (!auth.user)
+        <section class="bg-white rounded-xl p-6 mb-6">
+          <h4 class="font-bold">Login</h4>
+          <form method="POST" action="{{ route('auth.login') }}">
+            @set('loginErrors', flashMessages.get('errors.login'))
+
+            @!input({ label: 'Email', type: 'email', name: 'email', errors: loginErrors })
+            @!input({ label: 'Password', type: 'password', name: 'password', errors: loginErrors })
+
+            @button({ type: 'submit', block: true })
+              Login
+            @end
+          </form>
+        </section>
+
+        <section class="bg-white rounded-xl p-6 mb-6">
+          <h4 class="font-bold">Register</h4>
+          <form method="POST" action="{{ route('auth.register') }}">
+            @!input({ label: 'Email', type: 'email', name: 'email' })
+            @!input({ label: 'Password', type: 'password', name: 'password' })
+
+            @button({ type: 'submit', block: true })
+              Register
+            @end
+          </form>
+        </section>
+      @else
+        <section class="bg-white rounded-xl p-6 mb-6">
+          <h4 class="font-bold mb-3">Hi, {{ auth.user.email }}!</h4>
+          @button({ href: route('auth.logout'), block: true })
+            Logout
+          @end
+        </section>
+      @endif
+    </aside>
+
+    <main class="w-full md:w-3/4 bg-white rounded-xl p-6">
+      <h1 class="text-3xl font-bold">
+        <a href="https://adocasts.com/lessons/creating-a-pdf-generator-and-sending-dynamic-pdfs-as-email-attachments-with-adonisjs-and-puppeteer" target="_blank">
+          Adocasts PDF Generate &amp; Send Example
+        </a>
+      </h1>
+      <p class="text-gray-600 mb-6">
+        In this example, you can register/login and generate an invoice that'll be sent via email as an attachment.
+        <br/>
+        <a href="https://adocasts.com/lessons/creating-a-pdf-generator-and-sending-dynamic-pdfs-as-email-attachments-with-adonisjs-and-puppeteer" target="_blank" class="underline">
+          View Adocasts Lesson
+        </a>
+      </p>
+
+      @if (auth.user)
+        <h3 class="font-semibold">
+          Send An Invoice
+        </h3>
+        <p class="text-sm text-gray-600 mb-3">
+          In this lesson, we're setting this up as a form but this could also be put 
+          inside a scheduled monthly job or something similar
+        </p>
+        <form method="POST" action="{{ route('invoice.send') }}" class="max-w-sm">
+          @!input({ label: 'Recipient Name', name: 'recipient[name]' })
+          @!input({ label: 'Recipient Email', name: 'recipient[email]' })
+
+          @button({ type: 'submit' }) 
+            Send Invoice
+          @end
+        </form>
+      @else
+        <p>
+          Please login or register to generate an invoice
+        </p>
+      @endif
+    </main>
+  </div>
+  
+</body>
+</html>
